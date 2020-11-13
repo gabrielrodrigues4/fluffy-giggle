@@ -8,6 +8,7 @@ public class Main {
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner (System.in);
 		
+		System.out.println("O juniala?");
 		int n = sc.nextInt();
 		double[] vetor = new double[n];
 		double batata = 0;
