@@ -17,6 +17,17 @@ jobs:
           aws-region: sa-east-1
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: "Checkout"
+        uses: actions/checkout@v4
+        
+      - name: "Terraform Init"
+        run: terraform init
+        working-directory: ./src
+
+      - name: "Terraform Init"
+        run: terraform apply --auto-approve
+        working-directory: ./src
+
 
 
   
