@@ -3,9 +3,9 @@ terraform {
     aws = {
       source  = "hashicorp/aws"
       version = "5.72.1"
-    }   
+    }
   }
-   backend "s3" {
+  backend "s3" {
     bucket = "pedibuckets5467567"
     key    = "livestate.tfstate"
     region = "sa-east-1"
@@ -25,9 +25,19 @@ module "vpc" {
   enable_nat_gateway = true
   enable_vpn_gateway = true
 
-  tags = {
+  tags = merge({
     Terraform   = "true"
     Environment = "dev"
+  }, { "kubernetes.io/cluster/pedi_eks" = "shared" })
+
+  public_subnet_tags = {
+    "kubernetes.io/cluster/pedi_eks" = "shared"
+    "kubernetes.io/role/elb"         = 1
+  }
+
+  private_subnet_tags = {
+    "kubernetes.io/cluster/pedi_eks"  = "shared"
+    "kubernetes.io/role/internal-elb" = 1
   }
 }
 
